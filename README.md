@@ -5,7 +5,7 @@ A Pokedex app built with React (work in progress)
 - After multiple btn clicks it clears output but continues where it left off (disable btn maybe?)
 - ...
 
-## Todos (also in todos.txt)
+## Todos
 - Add a search bar
 - Add more region dexes and on national dex
 - Add individual pokemon info boxes (or pages) with abilities, stats, etc.
