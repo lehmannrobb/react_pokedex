@@ -32,7 +32,9 @@ const Pokedex = () => {
         fetch('https://pokeapi.co/api/v2/pokemon?limit=151')
         .then(res => res.json())
         .then(data => {
-            data.results.forEach(pokemon => fetchPokeData(pokemon));
+            for (let i = 0; i < data.results.length; i++) {
+                fetchPokeData(data.results[i]);
+            }
         })
         .catch(err => console.log(err));
         setLoading(false);
@@ -45,7 +47,9 @@ const Pokedex = () => {
         fetch('https://pokeapi.co/api/v2/pokemon?limit=100&offset=151')
         .then(res => res.json())
         .then(data => {
-            data.results.forEach(pokemon => fetchPokeData(pokemon));
+            for (let i = 0; i < data.results.length; i++) {
+                fetchPokeData(data.results[i]);
+            }
         })
         .catch(err => console.log(err));
         setLoading(false);
