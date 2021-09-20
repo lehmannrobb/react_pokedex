@@ -1,7 +1,6 @@
 # react_pokedex
 A Pokedex app built with React (work in progress)
 ## Bugs
-- Keeps loading out of order (tried async/await and sorting yet still loads out of order most of the time)
 - After multiple btn clicks it clears output but continues where it left off (disable btn maybe? or cancel fetch then recall)
 - ...
 
