@@ -25,35 +25,17 @@ const Header = () => {
 
 const Pokedex = () => {
     const [loading, setLoading] = React.useState(false);
+    const [count, setCount] = React.useState(0);
 
-    const getKanto = () => {
+    const getPokedex = async () => {
         resetPokemon();
         setLoading(true);
-        fetch('https://pokeapi.co/api/v2/pokemon?limit=151')
+        setCount(prevCount => prevCount + 20);
+        await fetch('https://pokeapi.co/api/v2/pokemon?limit=20')
         .then(res => res.json())
-        .then(data => {
-            for (let i = 0; i < data.results.length; i++) {
-                fetchPokeData(data.results[i]);
-            }
-        })
+        .then(data => data.results.forEach(pokemon => fetchPokeData(pokemon)))
         .catch(err => console.log(err));
         setLoading(false);
-
-    }
-
-    const getJohto = () => {
-        resetPokemon();
-        setLoading(true);
-        fetch('https://pokeapi.co/api/v2/pokemon?limit=100&offset=151')
-        .then(res => res.json())
-        .then(data => {
-            for (let i = 0; i < data.results.length; i++) {
-                fetchPokeData(data.results[i]);
-            }
-        })
-        .catch(err => console.log(err));
-        setLoading(false);
-
     }
 
     const fetchPokeData = async (pokemon) => {
@@ -99,15 +81,26 @@ const Pokedex = () => {
         output.innerHTML = '';
     }
 
+    const loadMore = async () => {
+        setLoading(true);
+        setCount(prevCount => prevCount + 20);
+        await fetch(`https://pokeapi.co/api/v2/pokemon?offset=${count}&limit=20`)
+        .then(res => res.json())
+        .then(data => data.results.forEach(pokemon => fetchPokeData(pokemon)))
+        .catch(err => console.log(err));
+        setLoading(false);
+
+    }
+
 
     return(
         <div className="text-center pokedex">
             <div className="nav-bar">
-                <button onClick={getKanto} className="btn">Load Kanto Pokédex</button>
-                <button onClick={getJohto} className="btn">Load Johto Pokédex</button>
+                <button onClick={getPokedex} className="btn">Load Pokédex</button>
             </div>
             <div id="loading">{ loading ? ('Loading Pokédex...') : ''}</div>
             <div id="output" className="m-4"></div>
+            <div onClick={loadMore} className="btn">Load More</div>
         </div>
     ) 
 
