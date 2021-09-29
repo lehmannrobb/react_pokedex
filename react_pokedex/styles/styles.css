@@ -79,6 +79,10 @@ h1 {
     justify-content: space-around;
 }
 
+#poke-name {
+    font-weight: bold;
+}
+
 ul {
     list-style-type: none;
     text-align: center;
