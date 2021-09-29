@@ -66,7 +66,7 @@ const Pokedex = () => {
                 <div id='poke-info'>
                     <div id="poke-id">#${id}</div>
                         <hr>
-                    <div id="poke-name>${name}</div>
+                    <div id="poke-name">${name}</div>
                         <hr>
                     <div class="type-container">
                         <span class="type-block" id="${types[0]}">${type[0]}</span>
