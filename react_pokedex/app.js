@@ -30,6 +30,7 @@ const Pokedex = () => {
     const getPokedex = async () => {
         resetPokemon();
         setLoading(true);
+        document.querySelector('.toggle').style.visibility = 'visible';
         setCount(prevCount => prevCount + 20);
         await fetch('https://pokeapi.co/api/v2/pokemon?limit=20')
         .then(res => res.json())
@@ -100,7 +101,7 @@ const Pokedex = () => {
             </div>
             <div id="loading">{ loading ? ('Loading Pokédex...') : ''}</div>
             <div id="output" className="m-4"></div>
-            <div onClick={loadMore} className="btn">Load More</div>
+            <div onClick={loadMore} className="btn toggle">Load More</div>
         </div>
     ) 
 
