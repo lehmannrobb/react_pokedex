@@ -14,10 +14,10 @@ const Header = () => {
             <h1>
                 <img 
                 width="10%" 
-                src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/f4398528-5ab6-40cf-b4ee-da3001470705/dbx4hvm-7d756e36-fe80-427a-8b3a-48949cbcb696.png/v1/fill/w_400,h_431,strp/pokemon_go_gym_symbol_in_gray_by_memimouse_dbx4hvm-fullview.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9NDMxIiwicGF0aCI6IlwvZlwvZjQzOTg1MjgtNWFiNi00MGNmLWI0ZWUtZGEzMDAxNDcwNzA1XC9kYng0aHZtLTdkNzU2ZTM2LWZlODAtNDI3YS04YjNhLTQ4OTQ5Y2JjYjY5Ni5wbmciLCJ3aWR0aCI6Ijw9NDAwIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmltYWdlLm9wZXJhdGlvbnMiXX0.3tI8HjR3yv49xaMzVfj3yt7Vs6scqnsgTpWj7-LXV_w"
+                src="https://www.freeiconspng.com/thumbs/pokeball-png/file-pokeball-png-0.png"
                 id="logo"
                 />
-                Pokédex
+                National Pokédex
             </h1>
         </div>
     )
