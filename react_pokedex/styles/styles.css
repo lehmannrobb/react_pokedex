@@ -52,6 +52,9 @@ h1 {
 
 }
 
+.toggle {
+    visibility: hidden;
+}
 /* Start Pokemon Container Elements */
 
 .pokemon-container {
