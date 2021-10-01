@@ -27,9 +27,18 @@ const Pokedex = () => {
     const [loading, setLoading] = React.useState(false);
     const [count, setCount] = React.useState(0);
 
+    document.addEventListener("scroll", (e) => {
+        if (document.documentElement.scrollTop > 400) {
+            document.querySelector('#goTop').style.visibility = 'visible';
+        }   else {
+            document.querySelector('#goTop').style.visibility = 'hidden';
+            }
+    });
+
     const getPokedex = async () => {
         resetPokemon();
         setLoading(true);
+
         document.querySelector('.toggle').style.visibility = 'visible';
         setCount(prevCount => prevCount + 20);
         await fetch('https://pokeapi.co/api/v2/pokemon?limit=20')
@@ -45,7 +54,7 @@ const Pokedex = () => {
             const res = await fetch(url);
             const pokeData = await res.json();
             setPokemon(pokeData);
-            console.log(pokeData.id);
+            console.log(pokeData.id, pokeData.name);
 
         }   catch(err) {
                 console.log(err);
@@ -65,9 +74,7 @@ const Pokedex = () => {
                 <img id="poke-pic" src='https://img.pokemondb.net/sprites/bank/normal/${pokeData.name}.png'/>
                 <div id='poke-info'>
                     <div id="poke-id">#${id}</div>
-                        <hr>
                     <div id="poke-name">${name}</div>
-                        <hr>
                     <div class="type-container">
                         <span class="type-block" id="${types[0]}">${type[0]}</span>
                         <span class="type-block" id="${types[1] ? types[1] : ''}">${type[1] ? type[1] : ''}</span>
@@ -80,6 +87,10 @@ const Pokedex = () => {
     const resetPokemon = () => {
         const output = document.getElementById('output');
         output.innerHTML = '';
+    }
+
+    const goTop = () => {
+        window.scrollTo({ top: 0, behavior: "smooth"});
     }
 
     const loadMore = async () => {
@@ -98,10 +109,12 @@ const Pokedex = () => {
         <div className="text-center pokedex">
             <div className="nav-bar">
                 <button onClick={getPokedex} className="btn">Load Pokédex</button>
+                <div onClick={goTop} className="btn fas fa-arrow-circle-up fa-2x"
+                id="goTop"></div>
             </div>
             <div id="loading">{ loading ? ('Loading Pokédex...') : ''}</div>
             <div id="output" className="m-4"></div>
-            <div onClick={loadMore} className="btn toggle">Load More</div>
+            <div onClick={loadMore} className="btn toggle">Load more...</div>
         </div>
     ) 
 
