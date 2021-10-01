@@ -29,9 +29,9 @@ const Pokedex = () => {
 
     document.addEventListener("scroll", (e) => {
         if (document.documentElement.scrollTop > 400) {
-            document.querySelector('#goTop').style.visibility = 'visible';
+            document.querySelector('#goTop').style.opacity = '100%';
         }   else {
-            document.querySelector('#goTop').style.visibility = 'hidden';
+            document.querySelector('#goTop').style.opacity = '0%';
             }
     });
 
@@ -109,7 +109,7 @@ const Pokedex = () => {
         <div className="text-center pokedex">
             <div className="nav-bar">
                 <button onClick={getPokedex} className="btn">Load Pokédex</button>
-                <div onClick={goTop} className="btn fas fa-arrow-circle-up fa-2x"
+                <div onClick={goTop} className="btn fade-in fas fa-arrow-circle-up fa-2x"
                 id="goTop"></div>
             </div>
             <div id="loading">{ loading ? ('Loading Pokédex...') : ''}</div>
