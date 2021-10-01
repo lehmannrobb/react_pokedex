@@ -14,7 +14,7 @@ body {
     color: rgb(0, 0, 0);
     padding: 0.75rem;
     align-content: center;
-    justify-content: space-evenly;
+    justify-content: space-around;
 }
 
 #logo {
@@ -50,7 +50,8 @@ h1 {
     background-color: rgba(0, 0, 0, 0);
     color: #000;
     position: fixed;
-    visibility: hidden;
+    opacity: 0%;
+    transition: opacity 0.75s;
     right: 0;
     bottom: 0;
 }
@@ -59,6 +60,8 @@ h1 {
     color: rgb(58, 58, 58);
     transform: scale(1.1);
 }
+
+
 /* End Nav */
 
 .pokedex {
