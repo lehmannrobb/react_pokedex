@@ -8,8 +8,9 @@ body {
     background: #fff url('https://assets.pokemon.com/static2/_ui/img/chrome/container_bg.png');
 }
 
+/* Start Header */
 #banner {
-    background-color: #003c976e;
+    background-color: #000;
     color: rgb(0, 0, 0);
     padding: 0.75rem;
     align-content: center;
@@ -24,7 +25,9 @@ h1 {
     color: #fff;
     font-family: 'Russo One', sans-serif;
 }
+/* End Header */
 
+/* Start Nav */
 .nav-bar {
     display: flex;
     align-items: center;
@@ -32,11 +35,31 @@ h1 {
 }
 
 .btn {
-    background-color: #003c976e;
+    background-color: #000;
     color: #fff;
     padding: 1rem;
     margin: 1rem 1rem;
 }
+
+.btn:hover {
+    background-color: rgb(58, 58, 58);
+    color: #fff;
+}
+
+#goTop {
+    background-color: rgba(0, 0, 0, 0);
+    color: #000;
+    position: fixed;
+    visibility: hidden;
+    right: 0;
+    bottom: 0;
+}
+
+#goTop:hover {
+    color: rgb(58, 58, 58);
+    transform: scale(1.1);
+}
+/* End Nav */
 
 .pokedex {
     margin-top: 1rem;
@@ -54,7 +77,6 @@ h1 {
 }
 
 /* Start Pokemon Container Elements */
-
 .pokemon-container {
     display: flex;
     flex-direction: column;
@@ -87,5 +109,4 @@ ul {
     list-style-type: none;
     text-align: center;
 }
-
 /* End Pokemon Container Elements */
