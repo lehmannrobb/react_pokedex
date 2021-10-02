@@ -24,9 +24,10 @@ const Header = () => {
 }
 
 const Pokedex = () => {
+
     const [loading, setLoading] = React.useState(false);
     const [count, setCount] = React.useState(0);
-
+    
     document.addEventListener("scroll", (e) => {
         if (document.documentElement.scrollTop > 400) {
             document.querySelector('#goTop').style.opacity = '100%';
@@ -38,7 +39,9 @@ const Pokedex = () => {
     const getPokedex = async () => {
         resetPokemon();
         setLoading(true);
+        document.querySelector('#search').value = '';
 
+        document.querySelector('#load-dex').innerText = 'Reload Pokédex';
         document.querySelector('.toggle').style.visibility = 'visible';
         setCount(prevCount => prevCount + 20);
         await fetch('https://pokeapi.co/api/v2/pokemon?limit=20')
@@ -84,13 +87,38 @@ const Pokedex = () => {
         `;
     }
 
-    const resetPokemon = () => {
-        const output = document.getElementById('output');
-        output.innerHTML = '';
+    const searchPokedex = async () => {
+        const input = document.querySelector('#search');
+        const query = input.value.toLowerCase();
+        resetPokemon();
+        resetLoadBtn();
+        setLoading(true);
+        document.querySelector('.toggle').style.visibility = 'hidden';
+
+
+        await fetch(`https://pokeapi.co/api/v2/pokemon/${query}`)
+        .then(res => res.json())
+        .then(pokeData => setPokemon(pokeData))
+        .catch(err => console.log(err));
+        setLoading(false);
+        
+        console.log(input.value);
     }
 
-    const goTop = () => {
-        window.scrollTo({ top: 0, behavior: "smooth"});
+    const getRandom = async () => {
+        const random = Math.floor((Math.random() * 151) + 1);
+        resetPokemon();
+        resetLoadBtn();
+        setLoading(true);
+        document.querySelector('.toggle').style.visibility = 'hidden';
+
+        await fetch(`https://pokeapi.co/api/v2/pokemon/${random}`)
+        .then(res => res.json())
+        .then(pokeData => setPokemon(pokeData))
+        .catch(err => console.log(err));
+        setLoading(false);
+        
+        console.log(random);
     }
 
     const loadMore = async () => {
@@ -104,11 +132,32 @@ const Pokedex = () => {
 
     }
 
+    const resetPokemon = () => {
+        const output = document.getElementById('output');
+        output.innerHTML = '';
+    }
+
+    const resetLoadBtn = () => {
+        document.querySelector('#load-dex').innerText = 'Load Pokédex';
+    }
+
+    const goTop = () => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
 
     return(
         <div className="text-center pokedex">
             <div className="nav-bar">
-                <button onClick={getPokedex} className="btn">Load Pokédex</button>
+                <button onClick={getPokedex} className="btn" id="load-dex">Load Pokédex</button>
+                <input 
+                    className="rounded-lg" 
+                    type="text" 
+                    id="search" 
+                    onChange={searchPokedex}
+                    placeholder="Search for a Pokémon..." 
+                />
+                <div className="btn" onClick={getRandom}>Randomize <i className="fas fa-random"></i></div>
                 <div onClick={goTop} className="btn fade-in fas fa-arrow-circle-up fa-2x"
                 id="goTop"></div>
             </div>
