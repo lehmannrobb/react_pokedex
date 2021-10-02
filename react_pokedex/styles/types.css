@@ -78,6 +78,10 @@
     background: linear-gradient(rgb(85, 85, 85), rgb(189, 189, 189));
 }
 
+#dark {
+    background-color: rgb(33, 33, 33);
+}
+
 /* End Types (Gen2)*/
 
 /* Start Types (Gen6) */
