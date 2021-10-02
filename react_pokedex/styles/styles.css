@@ -46,6 +46,13 @@ h1 {
     color: #fff;
 }
 
+#search {
+    width: 50%;
+    font-size: 16px;
+    padding: 1rem;
+    border: 1px solid #ddd;
+}
+
 #goTop {
     background-color: rgba(0, 0, 0, 0);
     color: #000;
