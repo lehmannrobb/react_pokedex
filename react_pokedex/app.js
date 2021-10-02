@@ -38,8 +38,8 @@ const Pokedex = () => {
 
     const getPokedex = async () => {
         resetPokemon();
+        resetSearch();
         setLoading(true);
-        document.querySelector('#search').value = '';
 
         document.querySelector('#load-dex').innerText = 'Reload Pokédex';
         document.querySelector('.toggle').style.visibility = 'visible';
@@ -108,6 +108,7 @@ const Pokedex = () => {
     const getRandom = async () => {
         const random = Math.floor((Math.random() * 151) + 1);
         resetPokemon();
+        resetSearch();
         resetLoadBtn();
         setLoading(true);
         document.querySelector('.toggle').style.visibility = 'hidden';
@@ -139,6 +140,10 @@ const Pokedex = () => {
 
     const resetLoadBtn = () => {
         document.querySelector('#load-dex').innerText = 'Load Pokédex';
+    }
+
+    const resetSearch = () => {
+        document.querySelector('#search').value = '';
     }
 
     const goTop = () => {
