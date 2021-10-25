@@ -36,32 +36,33 @@ const Pokedex = () => {
             }
     });
 
-    const getPokedex = async () => {
+    const getPokedex = () => {
         resetPokemon();
         resetSearch();
         setLoading(true);
+        setCount(0);
 
         document.querySelector('#load-dex').innerText = 'Reload Pokédex';
         document.querySelector('.toggle').style.visibility = 'visible';
-        setCount(prevCount => prevCount + 20);
-        await fetch('https://pokeapi.co/api/v2/pokemon?limit=20')
+        
+        fetch('https://pokeapi.co/api/v2/pokemon?limit=20')
         .then(res => res.json())
         .then(data => data.results.forEach(pokemon => fetchPokeData(pokemon)))
         .catch(err => console.log(err));
+
         setLoading(false);
+        setCount(prevCount => prevCount + 20);
     }
 
-    const fetchPokeData = async (pokemon) => {
-        try {
-            const url = pokemon.url;
-            const res = await fetch(url);
-            const pokeData = await res.json();
+    const fetchPokeData = (pokemon) => {
+        
+        fetch(pokemon.url)
+        .then(res => res.json())
+        .then(pokeData => {
             setPokemon(pokeData);
             console.log(pokeData.id, pokeData.name);
-
-        }   catch(err) {
-                console.log(err);
-        }
+        })
+        .catch(err => console.log(err));
     }
 
     const setPokemon = (pokeData) => {
@@ -106,7 +107,7 @@ const Pokedex = () => {
     }
 
     const getRandom = async () => {
-        const random = Math.floor((Math.random() * 151) + 1);
+        const random = Math.floor((Math.random() * 721) + 1);
         resetPokemon();
         resetSearch();
         resetLoadBtn();
@@ -122,10 +123,11 @@ const Pokedex = () => {
         console.log(random);
     }
 
-    const loadMore = async () => {
+    const loadMore = () => {
         setLoading(true);
         setCount(prevCount => prevCount + 20);
-        await fetch(`https://pokeapi.co/api/v2/pokemon?offset=${count}&limit=20`)
+        
+        fetch(`https://pokeapi.co/api/v2/pokemon?offset=${count}&limit=20`)
         .then(res => res.json())
         .then(data => data.results.forEach(pokemon => fetchPokeData(pokemon)))
         .catch(err => console.log(err));
