@@ -8,4 +8,3 @@ A Pokedex app built with React (work in progress)
 - Make search bar dynamically load pokemon
 - Add more region pokedexes
 - Add individual pokemon info boxes (or pages) with abilities, stats, etc.
-- Add styling for other types
