@@ -1,7 +1,7 @@
 # React Pokedex
 A Pokedex app built with React (work in progress)
 ## Bugs
-- Still loading out of order
+- Loading out of order
 - ...
 
 ## Todos
