@@ -1,5 +1,5 @@
 # React Pokedex
-A Pokedex app built with React (work in progress)
+A Pokedex app built with React and data fetched from the pokemon API (work in progress)
 ## Bugs
 - Loading out of order
 - ...
