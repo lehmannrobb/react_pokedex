@@ -36,7 +36,8 @@ const Pokedex = () => {
             }
     });
 
-    const getPokedex = () => {
+    const getPokedex = async () => {
+        console.clear();
         resetPokemon();
         resetSearch();
         setLoading(true);
@@ -45,37 +46,51 @@ const Pokedex = () => {
         document.querySelector('#load-dex').innerText = 'Reload Pokédex';
         document.querySelector('.toggle').style.visibility = 'visible';
         
-        fetch('https://pokeapi.co/api/v2/pokemon?limit=20')
+        await fetch('https://pokeapi.co/api/v2/pokemon?limit=20')
         .then(res => res.json())
-        .then(data => data.results.forEach(pokemon => fetchPokeData(pokemon)))
+        .then(data => Promise.all(data.results.map(pokemon => fetchPokeData(pokemon))))
         .catch(err => console.log(err));
 
-        setLoading(false);
         setCount(prevCount => prevCount + 20);
+
     }
 
     const fetchPokeData = (pokemon) => {
-        
+
+        const pokeArr = [];
+    
         fetch(pokemon.url)
         .then(res => res.json())
-        .then(pokeData => {
-            setPokemon(pokeData);
-            console.log(pokeData.id, pokeData.name);
+        .then(p => {
+            pokeArr.push(p)
         })
         .catch(err => console.log(err));
+
+        pokeArr.sort((a, b) => a.id - b.id);
+        setTimeout(() => {
+            pokeArr.map(poke => {
+                console.log(poke.id, poke.name);
+                setPokemon(poke);
+            })
+        }, 1500)
+
+        
+
     }
 
-    const setPokemon = (pokeData) => {
+    const setPokemon = (poke) => {
+        setLoading(false);
+
         let output = document.getElementById('output');
-        let name = pokeData.name.charAt(0).toUpperCase() + pokeData.name.slice(1);
-        let id = ("00" + pokeData.id).slice(-3)
-        let pokeTypes = pokeData.types;
+        let name = poke.name.charAt(0).toUpperCase() + poke.name.slice(1);
+        let id = ("00" + poke.id).slice(-3)
+        let pokeTypes = poke.types;
         let types = pokeTypes.map((pokeType) => pokeType.type.name);
         let type = types.map(type => type.charAt(0).toUpperCase() + type.slice(1));
 
         output.innerHTML += `
             <div class='pokemon-container'>
-                <img id="poke-pic" src='https://img.pokemondb.net/sprites/bank/normal/${pokeData.name}.png'/>
+                <img id="poke-pic" src='https://img.pokemondb.net/sprites/bank/normal/${poke.name}.png'/>
                 <div id='poke-info'>
                     <div id="poke-id">#${id}</div>
                     <div id="poke-name">${name}</div>
@@ -94,44 +109,39 @@ const Pokedex = () => {
         resetPokemon();
         resetLoadBtn();
         setLoading(true);
-        document.querySelector('.toggle').style.visibility = 'hidden';
 
 
         await fetch(`https://pokeapi.co/api/v2/pokemon/${query}`)
         .then(res => res.json())
-        .then(pokeData => setPokemon(pokeData))
+        .then(poke => setPokemon(poke))
         .catch(err => console.log(err));
-        setLoading(false);
-        
-        console.log(input.value);
+
     }
 
     const getRandom = async () => {
         const random = Math.floor((Math.random() * 721) + 1);
+
+        setLoading(true);
         resetPokemon();
         resetSearch();
         resetLoadBtn();
-        setLoading(true);
         document.querySelector('.toggle').style.visibility = 'hidden';
 
         await fetch(`https://pokeapi.co/api/v2/pokemon/${random}`)
         .then(res => res.json())
-        .then(pokeData => setPokemon(pokeData))
+        .then(poke => setPokemon(poke))
         .catch(err => console.log(err));
-        setLoading(false);
-        
-        console.log(random);
+
     }
 
-    const loadMore = () => {
+    const loadMore = async () => {
         setLoading(true);
         setCount(prevCount => prevCount + 20);
         
-        fetch(`https://pokeapi.co/api/v2/pokemon?offset=${count}&limit=20`)
+        await fetch(`https://pokeapi.co/api/v2/pokemon?offset=${count}&limit=20`)
         .then(res => res.json())
         .then(data => data.results.forEach(pokemon => fetchPokeData(pokemon)))
         .catch(err => console.log(err));
-        setLoading(false);
 
     }
 
@@ -168,9 +178,17 @@ const Pokedex = () => {
                 <div onClick={goTop} className="btn fade-in fas fa-arrow-circle-up fa-2x"
                 id="goTop"></div>
             </div>
-            <div id="loading">{ loading ? ('Loading Pokédex...') : ''}</div>
+
             <div id="output" className="m-4"></div>
-            <div onClick={loadMore} className="btn toggle">Load more...</div>
+            <div className="loader-wrapper">
+                { loading ? 
+                    <div className="loader">
+                        <img width="10%" src="https://www.freeiconspng.com/thumbs/pokeball-png/file-pokeball-png-0.png" />
+                    </div>
+                : 
+                <div onClick={loadMore} className="btn toggle">Load More...</div>
+                }
+            </div>
         </div>
     ) 
 
