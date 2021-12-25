@@ -71,8 +71,29 @@ h1 {
 
 /* End Nav */
 
+/* Start Pokedex */
 .pokedex {
     margin-top: 1rem;
+}
+
+.loader-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 2.5rem;
+}
+
+.loader {
+    animation: spin 2s linear infinite;
+}
+  
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.toggle {
+    visibility: hidden;
 }
 
 #output {
@@ -81,10 +102,7 @@ h1 {
     align-items: center;
     justify-content: space-evenly;
 }
-
-.toggle {
-    visibility: hidden;
-}
+/* End Pokedex */
 
 /* Start Pokemon Container Elements */
 .pokemon-container {
