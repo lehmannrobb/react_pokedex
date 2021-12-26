@@ -46,7 +46,7 @@ const Pokedex = () => {
         document.querySelector('#load-dex').innerText = 'Reload Pokédex';
         document.querySelector('.toggle').style.visibility = 'visible';
         
-        await fetch('https://pokeapi.co/api/v2/pokemon?limit=20')
+        await fetch('https://pokeapi.co/api/v2/pokemon?limit=21')
         .then(res => res.json())
         .then(data => Promise.all(data.results.map(pokemon => fetchPokeData(pokemon))))
         .catch(err => console.log(err));
@@ -69,8 +69,8 @@ const Pokedex = () => {
         pokeArr.sort((a, b) => a.id - b.id);
         setTimeout(() => {
             pokeArr.map(poke => {
-                console.log(poke.id, poke.name);
                 setPokemon(poke);
+                console.log(poke.id, poke.name);
             })
         }, 1500)
 
@@ -96,7 +96,7 @@ const Pokedex = () => {
                     <div id="poke-name">${name}</div>
                     <div class="type-container">
                         <span class="type-block" id="${types[0]}">${type[0]}</span>
-                        <span class="type-block" id="${types[1] ? types[1] : ''}">${type[1] ? type[1] : ''}</span>
+                        <span class="type-block" id="${types[1] ? types[1] : ''}" style="${!types[1] && 'display:none'}">${type[1] ? type[1] : ''}</span>
                     </div>
                 </div>
             </div>
@@ -138,7 +138,7 @@ const Pokedex = () => {
         setLoading(true);
         setCount(prevCount => prevCount + 20);
         
-        await fetch(`https://pokeapi.co/api/v2/pokemon?offset=${count}&limit=20`)
+        await fetch(`https://pokeapi.co/api/v2/pokemon?offset=${count}&limit=21`)
         .then(res => res.json())
         .then(data => data.results.forEach(pokemon => fetchPokeData(pokemon)))
         .catch(err => console.log(err));
@@ -172,7 +172,8 @@ const Pokedex = () => {
                     type="text" 
                     id="search" 
                     onChange={searchPokedex}
-                    placeholder="Search for a Pokémon..." 
+                    placeholder="Search for a Pokémon..."
+                    autocomplete="off" 
                 />
                 <div className="btn" onClick={getRandom}>Randomize <i className="fas fa-random"></i></div>
                 <div onClick={goTop} className="btn fade-in fas fa-arrow-circle-up fa-2x"
