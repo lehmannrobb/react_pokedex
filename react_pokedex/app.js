@@ -51,7 +51,7 @@ const Pokedex = () => {
         .then(data => Promise.all(data.results.map(pokemon => fetchPokeData(pokemon))))
         .catch(err => console.log(err));
 
-        setCount(prevCount => prevCount + 20);
+        setCount(prevCount => prevCount + 21);
 
     }
 
@@ -136,7 +136,7 @@ const Pokedex = () => {
 
     const loadMore = async () => {
         setLoading(true);
-        setCount(prevCount => prevCount + 20);
+        setCount(prevCount => prevCount + 21);
         
         await fetch(`https://pokeapi.co/api/v2/pokemon?offset=${count}&limit=21`)
         .then(res => res.json())
@@ -173,7 +173,7 @@ const Pokedex = () => {
                     id="search" 
                     onChange={searchPokedex}
                     placeholder="Search for a Pokémon..."
-                    autocomplete="off" 
+                    autoComplete="off" 
                 />
                 <div className="btn" onClick={getRandom}>Randomize <i className="fas fa-random"></i></div>
                 <div onClick={goTop} className="btn fade-in fas fa-arrow-circle-up fa-2x"
