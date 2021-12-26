@@ -2,6 +2,7 @@
 A Pokedex app built with React
 
 ## Bugs
+- If using search bar or randomizer after loading pokedex the load more btn will become visible
 - ...
 
 ## Todos
