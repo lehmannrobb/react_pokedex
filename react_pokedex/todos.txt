@@ -1,5 +1,2 @@
 List of todos for this app (improvements and bug fixes)
-1. Fix load order
-2. Make search bar dynamically load pokemon
-3. Add individual pokemon info boxes (or pages) with abilities, stats, etc.
-4. Add styling for other types
+- Add individual pokemon info boxes (or pages) with abilities, stats, etc.
